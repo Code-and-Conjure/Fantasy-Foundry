@@ -15,7 +15,7 @@ dependencies = [
 name = "die_roll"
 version = "0.1.0"
 dependencies = [
- "rand 0.5.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "roll 0.1.0",
 ]
 
 [[package]]
@@ -53,6 +53,13 @@ dependencies = [
 name = "rand_core"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "roll"
+version = "0.1.0"
+dependencies = [
+ "rand 0.5.5 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "winapi"
