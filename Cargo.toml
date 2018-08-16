@@ -1,7 +1,7 @@
 [package]
 name = "die_roll"
 version = "0.1.0"
-authors = ["nick"]
+authors = ["Nick Dolan <nicholas.dolan1@gmail.com>"]
 
 [dependencies]
-roll = { path = "./roll" }
+rpg_cli = { path = "./rpg_cli" }

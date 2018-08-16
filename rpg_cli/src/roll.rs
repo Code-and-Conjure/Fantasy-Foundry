@@ -1,4 +1,3 @@
-#![feature(try_reserve)]
 extern crate rand;
 
 use self::rand::Rng;
@@ -10,10 +9,10 @@ struct Roll {
 }
 
 #[derive(Debug)]
-pub struct RollQuery<'a> {
-    query: &'a str,
+pub struct RollQuery {
+    query: String,
     rolls: Option<Vec<Roll>>,
-    total: Option<u16>
+    pub total: Option<u16>
 }
 
 impl Roll{
@@ -29,8 +28,9 @@ impl Roll{
     }
 }
 
-impl<'a> RollQuery<'a> {
-    pub fn new(query: &str) -> RollQuery {
+impl RollQuery {
+    pub fn new(query: &[String]) -> RollQuery {
+        let query = query.as_ref().join("+");
         RollQuery{
             query,
             rolls: None,
@@ -48,10 +48,10 @@ impl<'a> RollQuery<'a> {
             
             assert_eq!(roll.len(), 2, "Roll must be in the form of {{ number }}d{{ sides }}");
 
-            let number = roll[0].parse::<u8>().expect("Number of Die must be between 0 and 255");
-            let sides = roll[1].parse::<u8>().expect("Sides of Die must be between 0 and 254");
+            let number = roll[0].parse::<u8>().expect("Number of Die must be a number between 0 and 255");
+            let sides = roll[1].parse::<u8>().expect("Sides of Die must be a number between 0 and 254");
 
-            rolls.try_reserve(number as usize).expect("Unable to reserve space!");
+            rolls.reserve(number as usize);
 
             for _ in 0..number{
                 let mut roll = Roll::new(sides);

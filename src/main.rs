@@ -1,14 +1,28 @@
-extern crate roll;
+extern crate rpg_cli;
 
+use rpg_cli::command::Command::{Chat, Roll};
 use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    assert!(args.len() > 1, "Must provide a dice roll");
+    assert!(args.len() > 1, "Must provide a command!");
 
-    let mut dice_query = roll::RollQuery::new(&args[1]);
-    dice_query.run();
+    let params = 
+        if args.len() > 2 { 
+            Some(&args[2..]) 
+        }
+        else { 
+            None
+        };
 
-    println!("{:?}", dice_query);
+    match rpg_cli::command::Command::new(&args[1], params){
+        Roll(mut cmd) => {
+            cmd.run();
+
+            println!("{:?}", cmd);
+        },
+        Chat(s) => println!("{}", s)
+    }
+
 }

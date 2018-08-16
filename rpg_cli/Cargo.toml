@@ -1,5 +1,5 @@
 [package]
-name = "roll"
+name = "rpg_cli"
 version = "0.1.0"
 authors = ["Nick Dolan <nicholas.dolan1@gmail.com>"]
 
