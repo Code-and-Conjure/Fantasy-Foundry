@@ -1,0 +1,63 @@
+* Features
+** Character Creation
+   Ability to create, save, and use characters that are fully customized.
+   Saved using PouchDB, shared using CouchDB;
+** Built for Steam?
+** Game Sessions
+*** Roll System
+*** Chat System
+** Sharing Characters
+   PouchDB syncing capabilities for replicating with a party. Only certain features will be shared across the entire party, and filtered replication will be used for the GM to have main access.
+** Installing from Sources
+*** Package System
+    Sources export min.js files which will be loaded.
+    RequireJS for dependency graphs
+*** Module Creation
+    Well documented module exports for packages. Assert statements preventing the loading of packages which do not export the right objects and code functionality.
+    Area within app for creating new modules and defining custom code to run.
+    Event based callbacks running in a predefined order (but editable from sources/players)
+** Local Storage of Data
+   PouchDB saves the Game's state, as well as the player's current state. Local copies of all of the sources will also be downloaded.
+* Functional Storage
+  min.js files within a file server hosted on a central server (if certified source) or from a remote repository. (Possibly shared locally)
+* Game
+** PC Gin
+   #+BEGIN_SRC typescript
+     interface pcgin_store {
+         _id: string;
+         _rev: string;
+
+         player_name: string;
+         character_name: string;
+         current_health: number;
+         max_health: number;
+         attributes: Array<{[name:string]: number}>;
+         level: number;
+         height:number;
+         weight:number;
+         description:string;
+
+         attacks: Array<{
+             name: string;
+             damage: string // Roll query
+         }>;
+     }
+
+     interface pcgin {
+         refresh(): pcgin_store;
+         loadSources();
+
+         store: pcgin_store;
+     }
+   #+END_SRC
+   
+** Sources
+   Redux setup with callable functions and payloads. Perhaps more like side-effects of said payloads.
+   #+BEGIN_SRC typescript
+      interface pcgin_source {
+          init(state: pcgin_store); // To define variables and values used in this source
+          test();
+          require();
+          levelUp(p, n);
+     }
+   #+END_SRC
