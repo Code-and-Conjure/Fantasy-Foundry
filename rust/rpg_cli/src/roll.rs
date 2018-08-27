@@ -29,8 +29,7 @@ impl Roll{
 }
 
 impl RollQuery {
-    pub fn new(query: &[String]) -> RollQuery {
-        let query = query.as_ref().join("+");
+    pub fn new(query: String) -> RollQuery {
         RollQuery{
             query,
             rolls: None,

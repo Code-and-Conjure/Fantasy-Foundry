@@ -6,13 +6,13 @@ pub enum Command {
 }
 
 impl Command {
-    pub fn new(cmd: &str, args: Option<&[String]>) -> Command {
-        match cmd {
+    pub fn new(cmd: &str) -> Command {
+        match &cmd[0..2] {
             "/r" => { 
-                return Command::Roll(RollQuery::new(args.unwrap()));
+                return Command::Roll(RollQuery::new(cmd[3..].to_owned()));
             }
             _ => 
-                return Command::Chat(cmd.to_owned() + " " + &args.unwrap().join(" "))
+                return Command::Chat(cmd.to_owned())
         }
     }
 }

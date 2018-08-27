@@ -8,15 +8,7 @@ fn main() {
 
     assert!(args.len() > 1, "Must provide a command!");
 
-    let params = 
-        if args.len() > 2 { 
-            Some(&args[2..]) 
-        }
-        else { 
-            None
-        };
-
-    match rpg_cli::command::Command::new(&args[1], params){
+    match rpg_cli::command::Command::new(&args[1]){
         Roll(mut cmd) => {
             cmd.run();
 
