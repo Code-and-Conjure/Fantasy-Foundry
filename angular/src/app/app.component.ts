@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'rpg-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [MatDialog]
 })
 export class AppComponent {
-  title = 'angular';
+  title = 'Tabletop RPG';
+
+  constructor(
+    private _dialog: MatDialog
+  ){}
 }
