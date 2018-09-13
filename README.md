@@ -1,14 +1,15 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [Tabletop RPG Creator](#tabletop-rpg-creator)
-    - [Store](#storeinfostoremd-redux-store-contains-the-global-state)
-    - [Sources](#sourcesinfosourcemd-information-about-creating-sources)
-    - [Character](#characterinfocharactermd-character-being-created)
+- [Aurora Comatose](#aurora-comatose)
+    - [What is this?](#what-is-this)
+    - [How to use this](#how-to-use-this)
 
 <!-- markdown-toc end -->
 
-# Tabletop RPG Creator #
-## [Store](./info/store.md "Redux store contains the global state") ##
-## [Sources](./info/source.md "Information about creating sources") ##
-## [Character](./info/character.md "Character being created") ##
+# Aurora Comatose #
+## What is this? ##
+In a way, this is a way to learn new technology while working on something we the contributors have a passion for: Tabletop RPG. This system is our attempt at a character creation tool, and a game callback system that will allow anyone to write their own rules, systems, and packages that will directly integrate. The UI (user interface) will offer an easy way to use the system, as well as display the current state of the store (characters/races/classes/etc.).
+## How to use this ##
+Custom sources will be loaded, and are given access to dispatch actions to modify the state of the store, as well as listen for actions to be dispatched of their own for custom callback functions.
+# [Wiki](https://thelettertheta.github.io/tabletop-rpg/ "See our Wiki!") #
