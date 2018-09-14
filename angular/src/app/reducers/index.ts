@@ -5,11 +5,12 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
-import { State as pc, reducer as pcreducer } from '../player-character/reducers/pc.reducer';
 import { environment } from '../../environments/environment';
+import { PlayerCharacter } from '../models/pc.model';
+import { reducer as pcreducer } from './player-character.reducer';
 
 export interface State {
-  character: pc
+  character: PlayerCharacter
 }
 
 export const reducers: ActionReducerMap<State> = {

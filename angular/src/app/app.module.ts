@@ -30,10 +30,11 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
+      logOnly: environment.production
     }),
-    StoreModule.forRoot(reducers, { metaReducers }),
     ReactiveFormsModule,
     EffectsModule.forRoot([]),
     HttpClientModule,
