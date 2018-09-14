@@ -16,9 +16,12 @@ import {
 } from '@angular/material';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -26,13 +29,17 @@ import { reducers, metaReducers } from './reducers';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
+    StoreModule.forRoot(reducers, { metaReducers }),
     ReactiveFormsModule,
+    EffectsModule.forRoot([]),
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    AppRoutingModule,
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

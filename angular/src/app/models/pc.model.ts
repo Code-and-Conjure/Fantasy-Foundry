@@ -1,13 +1,13 @@
 export enum Alignment {
-  "Lawful Evil",
-  "Lawful Neutral",
-  "Lawful Good",
-  "Neutral Good",
-  "Neutral Neutral",
-  "Neutral Evil",
-  "Chaotic Good",
-  "Chaotic Neutral",
-  "Chaotic Evil"
+  le = "Lawful Evil",
+  ln = "Lawful Neutral",
+  lg = "Lawful Good",
+  ng = "Neutral Good",
+  nn = "Neutral Neutral",
+  ne = "Neutral Evil",
+  cg = "Chaotic Good",
+  cn = "Chaotic Neutral",
+  ce = "Chaotic Evil"
 }
 
 export interface PlayerCharacter {
@@ -31,24 +31,24 @@ export interface PlayerCharacter {
   notes: any;
 
   /*** Dictionary Properties ***/
-  ability_modifiers: Array<{
+  ability_modifiers: {
     [name:string]: number
-  }>;
-  ability_scores: Array<{
+  };
+  ability_scores: {
     [name:string]: number
-  }>;
-  ability_ranges: Array<{
+  };
+  ability_ranges: {
     [name:string]: number
-  }>;
-  languages: Array<{
+  };
+  languages: {
     [name:string]: boolean // Denotes whether this is a spoken language
-  }>;
+  };
   levels: Array<{
     [level: number]: number
   }>;
-  movement: Array<{
+  movement: {
     [type: string]: number
-  }>;
+  };
   skills: Array<{
     name: string;
     ranks: number;
