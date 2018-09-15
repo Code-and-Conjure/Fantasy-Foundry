@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'pc', loadChildren: './player-character/player-character.module#PlayerCharacterModule'},
-  { path: '', redirectTo: 'pc', pathMatch: 'full'},
-  { path: '**', redirectTo: 'pc', pathMatch: 'full'},
+  { path: 'game', loadChildren: './game/game.module#GameModule'},
+  { path: '', redirectTo: 'game', pathMatch: 'full'},
+  { path: '**', redirectTo: 'game', pathMatch: 'full'},
 ];
 
 @NgModule({

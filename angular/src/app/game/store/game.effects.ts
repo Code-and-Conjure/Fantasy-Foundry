@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { PcActionTypes } from '../actions/pc.actions';
+import { GameActionTypes } from './game.actions';
 
 @Injectable()
-export class PcEffects {
+export class GameEffects {
 
   @Effect()
-  loadFoos$ = this.actions$.pipe(ofType(PcActionTypes.LoadPcs));
+  loadFoos$ = this.actions$.pipe(ofType(GameActionTypes.LoadGames));
 
   constructor(private actions$: Actions) {}
 }

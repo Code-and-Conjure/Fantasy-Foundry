@@ -1,6 +1,6 @@
-import { reducer, initialState } from './pc.reducer';
+import { reducer, initialState } from './game.reducer';
 
-describe('Pc Reducer', () => {
+describe('Game Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

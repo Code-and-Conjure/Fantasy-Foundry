@@ -1,22 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import * as fromPc from './reducers/pc.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { PcEffects } from './effects/pc.effects';
-import { BaseInfoComponent } from './base-info/base-info.component';
+
+import { reducers, metaReducers } from './store/reducer';
+import { PlayerCharacterRoutingModule } from './player-character-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('pc', fromPc.reducer),
-    EffectsModule.forFeature([PcEffects]),
-    StoreModule.forFeature('pc', fromPc.reducer, { metaReducers: fromPc.metaReducers }),
-    RouterModule.forChild([
-      { path: '' , component: BaseInfoComponent }
-    ]),
+    PlayerCharacterRoutingModule,
+    StoreModule.forFeature("character", reducers, { metaReducers }),
   ],
-  declarations: [BaseInfoComponent, BaseInfoComponent]
+  declarations: []
 })
 export class PlayerCharacterModule { }
