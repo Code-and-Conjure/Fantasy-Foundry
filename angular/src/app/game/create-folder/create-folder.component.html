@@ -1,15 +1,27 @@
 <mat-card>
   <h4 mat-card-title>New Folder</h4>
-  <mat-card-content>
-    <mat-form-field appearance="outline">
-      <input matInput type="text"/>
-      <mat-label>Game</mat-label>
-      <mat-icon>videogame_asset</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <textarea matInput type="text"></textarea>
-      <mat-label>Description</mat-label>
-      <mat-icon></mat-icon>
-    </mat-form-field>
-  </mat-card-content>
+  <form [formGroup]="folderFormGroup" (ngSubmit)="submit()">
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <input formControlName="name" matInput type="text"/>
+        <mat-label>Game</mat-label>
+        <mat-icon matPrefix>videogame_asset</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <textarea
+          matInput
+          formControlName="description"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="10"
+          #description="cdkTextareaAutosize"
+          type="text"></textarea>
+        <mat-label>Description</mat-label>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button [disabled]="!folderFormGroup.valid" type="submit">Create</button>
+      <button mat-button type="reset" color="warn">Cancel</button>
+    </mat-card-actions>
+  </form>
 </mat-card>

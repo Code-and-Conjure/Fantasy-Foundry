@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
+import { PouchService } from './services/pouch.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { EffectsModule } from '@ngrx/effects';
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     MatSnackBar,
+    PouchService,
   ],
   bootstrap: [AppComponent]
 })

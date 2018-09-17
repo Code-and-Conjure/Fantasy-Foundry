@@ -7,7 +7,6 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import { PlayerCharacter } from '../player-character/model';
-import { reducer as pcreducer } from '../player-character/store/reducer';
 
 export interface State {
 }

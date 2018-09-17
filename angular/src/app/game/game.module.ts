@@ -9,7 +9,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatButtonModule
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import * as fromGame from './store/game.reducer';
@@ -23,6 +24,7 @@ import { GameEffects } from './store/game.effects';
     ReactiveFormsModule,
     GameRoutingModule,
     MatCardModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
