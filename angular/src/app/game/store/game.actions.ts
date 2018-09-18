@@ -52,4 +52,4 @@ export class RemoveFolder implements Action {
   constructor(public payload: Folder) { }
 }
 
-export type GameActions = LoadFolders | SelectFolder | SaveFolder | AddFolder | SetFolders | DeleteFolder;
+export type GameActions = LoadFolders | SelectFolder | SaveFolder | AddFolder | SetFolders | DeleteFolder | RemoveFolder;
