@@ -4,7 +4,10 @@ import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 
 import { Folder } from '../model';
-import { SaveFolder, LoadFolders } from '../store/game.actions';
+import { SaveFolder, LoadFolders, SelectFolder } from '../store/game.actions';
+import { ActivatedRoute } from '@angular/router';
+import { switchMapTo } from 'rxjs/operators';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'rpg-create-folder',
@@ -21,10 +24,10 @@ export class CreateFolderComponent implements OnInit {
 
   constructor(
     private _store: Store<any>,
+    private _dialogRef: MatDialogRef<CreateFolderComponent>
   ) { }
 
   ngOnInit() {
-    this._store.dispatch(new LoadFolders())
   }
 
   submit(){
@@ -34,6 +37,7 @@ export class CreateFolderComponent implements OnInit {
     save._id = "folder_" + moment().toISOString();
 
     this._store.dispatch(new SaveFolder(save))
+    this._dialogRef.close();
   }
 
 }

@@ -1,0 +1,11 @@
+.folder {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  mat-card {
+    flex: 0 0 auto;
+    max-width: 25vh;
+    word-wrap: break-word;
+  }
+}

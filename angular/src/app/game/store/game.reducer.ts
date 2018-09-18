@@ -20,8 +20,13 @@ export function reducer(state = initialState, action: GameActions): State {
       return { ...state, selectedFolder: { ...action.payload } };
     case GameActionTypes.AddFolder:
       return { ...state, folders: [...state.folders, action.payload] };
-      case GameActionTypes.SetFolders:
-      return { ...state, folders: [...action.payload]};
+    case GameActionTypes.SetFolders:
+      return { ...state, folders: [...action.payload] };
+    case GameActionTypes.DeleteFolder:
+      const indexToRemove = state.folders.indexOf(action.payload);
+      state.folders.splice(indexToRemove, 1);
+      const folders = state.folders;
+      return { ...state, folders: folders }
     default:
       return { ...state };
   }

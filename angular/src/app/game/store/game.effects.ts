@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders } from './game.actions';
+import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders, DeleteFolder } from './game.actions';
 import { tap, map, switchMap, flatMap, catchError } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -20,6 +20,13 @@ export class GameEffects {
           map(v => new SetFolders(v))
         )),
   )
+
+  @Effect({dispatch: false})
+  deleteFolder$ = this.actions$.pipe(
+    ofType(GameActionTypes.DeleteFolder),
+    map((v: DeleteFolder) => v.payload),
+    tap(a => this._gameService.deleteFolder(a)),
+  );
 
   @Effect()
   saveFolder$ = this.actions$.pipe(

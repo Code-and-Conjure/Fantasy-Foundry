@@ -29,4 +29,8 @@ export class GameService {
   saveFolder(folder: Folder): Observable<any> {
     return from(this._pouchService.db.put(folder));
   }
+
+  deleteFolder(folder: Folder): Observable<any> {
+    return from(this._pouchService.db.remove(folder));
+  }
 }
