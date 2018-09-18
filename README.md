@@ -14,6 +14,6 @@ In a way, this is a way to learn new technology while working on something we th
 Custom sources will be loaded, and are given access to dispatch actions to modify the state of the store, as well as listen for actions to be dispatched of their own for custom callback functions.
 ## What's that name for? ##
 You know two words that sound really cool separately? Aurora and Comatose. Put them together, and we've achieved superior coolness not seen in apps with only one cool word.
-**But those word shave nothing to do with tabletop rpg**
+**But those words have nothing to do with tabletop rpg**
 Not true! Both words are cool - Just like tabletop rpg!
 # [Wiki](https://thelettertheta.github.io/tabletop-rpg/ "See our Wiki!") #
