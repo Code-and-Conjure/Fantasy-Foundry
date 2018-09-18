@@ -11,6 +11,8 @@ import { DbQuery } from '../models/db.model';
 })
 export class GameService {
 
+  public changeFeed: Observable<any> = this._pouchService.changeFeed;
+
   constructor(
     private _pouchService: PouchService
   ) { }

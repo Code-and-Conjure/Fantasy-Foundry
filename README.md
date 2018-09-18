@@ -17,3 +17,14 @@ You know two words that sound really cool separately? Aurora and Comatose. Put t
 **But those words have nothing to do with tabletop rpg**
 Not true! Both words are cool - Just like tabletop rpg!
 # [Wiki](https://thelettertheta.github.io/tabletop-rpg/ "See our Wiki!") #
+
+# Getting Started #
+## Couch ##
+You can sync with a CouchDB either hosted locally (for development) or externally. We use docker to run our image. Just remember to use authentication when syncing with your databases. The default port for CouchDB is http://localhost:5984. A developer authentication can be achieved using http://{{user}}:{{password}}@localhost:5984/{{database}}.
+## Node ##
+Download [Node](https://nodejs.org/en/ "nodejs")
+Then run ```cd angular/ && npm install``` to download the project dependencies.
+## Angular ##
+Install the ```@angular/cli``` via npm using the ```npm install -g @angular/cli@latest``` command from your terminal.
+## Serve ##
+Make sure you're in the angular/ directory and serve the project via the ```ng serve``` command.

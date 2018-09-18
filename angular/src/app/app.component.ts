@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material';
   providers: [MatDialog]
 })
 export class AppComponent {
-  title = 'Tabletop RPG';
+  title = 'Aurora Comatose';
 
   constructor(
     private _dialog: MatDialog
