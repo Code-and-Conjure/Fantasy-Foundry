@@ -4,20 +4,28 @@ import { Folder } from '../model';
 
 export interface State {
   folders: Array<Folder>;
+  selectedFolder: Folder;
 }
 
 export const initialState: State = {
-  folders: []
+  folders: [],
+  selectedFolder: null
 };
 
 export function reducer(state = initialState, action: GameActions): State {
   switch (action.type) {
-
-    case GameActionTypes.LoadGames:
-      return state;
-
-
+    case GameActionTypes.SelectFolder:
+      return { ...state, selectedFolder: { ...action.payload } };
+    case GameActionTypes.AddFolder:
+      return { ...state, folders: [action.payload, ...state.folders] };
+    case GameActionTypes.SetFolders:
+      return { ...state, folders: [...action.payload] };
+    case GameActionTypes.DeleteFolder:
+      const indexToRemove = state.folders.indexOf(action.payload);
+      state.folders.splice(indexToRemove, 1);
+      const folders = state.folders;
+      return { ...state, folders: folders }
     default:
-      return state;
+      return { ...state };
   }
 }

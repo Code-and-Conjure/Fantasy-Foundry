@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { GameRoutingModule } from './game-routing.module';
-import { CreateFolderComponent } from './create-folder/create-folder.component';
-
 import {
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatExpansionModule
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import * as fromGame from './store/game.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GameEffects } from './store/game.effects';
+import { FolderListComponent } from './folder-list/folder-list.component';
 
 
 @NgModule({
@@ -22,13 +24,15 @@ import { GameEffects } from './store/game.effects';
     CommonModule,
     ReactiveFormsModule,
     GameRoutingModule,
+    StoreModule.forFeature('game', fromGame.reducer),
+    EffectsModule.forFeature([GameEffects]),
     MatCardModule,
+    MatExpansionModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    StoreModule.forFeature('game', fromGame.reducer),
-    EffectsModule.forFeature([GameEffects]),
   ],
-  declarations: [CreateFolderComponent]
+  declarations: [FolderListComponent]
 })
 export class GameModule { }

@@ -1,12 +1,49 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { GameActionTypes } from './game.actions';
+import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders, DeleteFolder, RemoveFolder } from './game.actions';
+import { tap, map, switchMap, flatMap, catchError } from 'rxjs/operators';
+import { from } from 'rxjs';
+
+import { GameService } from '../game.service';
+import { DbPutResponse } from '../../models/db.model';
 
 @Injectable()
 export class GameEffects {
 
   @Effect()
-  loadFoos$ = this.actions$.pipe(ofType(GameActionTypes.LoadGames));
+  loadFolders$ = this.actions$.pipe(
+    ofType(GameActionTypes.LoadFolders),
+    switchMap(_ =>
+      this._gameService.getFolders()
+        .pipe(
+          map(v => v.rows.map(r => r.doc)),
+          map(v => new SetFolders(v))
+        )),
+  )
 
-  constructor(private actions$: Actions) {}
+  @Effect()
+  saveFolder$ = this.actions$.pipe(
+    ofType(GameActionTypes.SaveFolder),
+    map((v: SaveFolder) => v.payload),
+    switchMap(v =>
+      this._gameService.saveFolder(v).pipe(
+        map((r: DbPutResponse) => {
+          v._rev = r.rev;
+          return new AddFolder(v);
+        })
+      ))
+  );
+
+  @Effect()
+  deleteFolder$ = this.actions$.pipe(
+    ofType(GameActionTypes.DeleteFolder),
+    map((v: DeleteFolder) => v.payload),
+    switchMap(a => this._gameService.deleteFolder(a)
+              .pipe(
+                map(_ => new RemoveFolder(a))
+              )),
+  );
+
+  constructor(private actions$: Actions,
+    private _gameService: GameService) { }
 }

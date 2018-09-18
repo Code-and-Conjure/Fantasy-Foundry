@@ -4,4 +4,9 @@ export interface Folder {
 
   name: string;
   description: string;
+
+  characters?: Array<{
+    _id: string;
+    name: string;
+  }>;
 }

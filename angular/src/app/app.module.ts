@@ -13,6 +13,10 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatDialog,
   MatDialogModule,
+  MatInputModule,
+  MatIconModule,
+  MatCardModule,
+  MatButtonModule,
 } from '@angular/material';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth-interceptor.service';
@@ -22,10 +26,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
+import { PouchService } from './services/pouch.service';
+import { GameModule } from './game/game.module';
+import { CreateFolderComponent } from './game/create-folder/create-folder.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateFolderComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +46,10 @@ import { EffectsModule } from '@ngrx/effects';
     ReactiveFormsModule,
     EffectsModule.forRoot([]),
     HttpClientModule,
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule,
     MatSnackBarModule,
     MatDialogModule,
     AppRoutingModule,
@@ -48,6 +60,10 @@ import { EffectsModule } from '@ngrx/effects';
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     MatSnackBar,
+    PouchService,
+  ],
+  entryComponents: [
+    CreateFolderComponent
   ],
   bootstrap: [AppComponent]
 })
