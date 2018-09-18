@@ -14,12 +14,10 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: GameActions): State {
   switch (action.type) {
-    case GameActionTypes.LoadFolders:
-      return state;
     case GameActionTypes.SelectFolder:
       return { ...state, selectedFolder: { ...action.payload } };
     case GameActionTypes.AddFolder:
-      return { ...state, folders: [...state.folders, action.payload] };
+      return { ...state, folders: [action.payload, ...state.folders] };
     case GameActionTypes.SetFolders:
       return { ...state, folders: [...action.payload] };
     case GameActionTypes.DeleteFolder:

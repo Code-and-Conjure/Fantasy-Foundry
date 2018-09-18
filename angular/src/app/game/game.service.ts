@@ -21,8 +21,9 @@ export class GameService {
         {
           include_docs: true,
           attachments: false,
-          startkey: 'folder_',
-          endkey: 'folder_\ufff0',
+          startkey: 'folder_\ufff0',
+          endkey: 'folder_',
+          descending: true,
         }));
   }
 

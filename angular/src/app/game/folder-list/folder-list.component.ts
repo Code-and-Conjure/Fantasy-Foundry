@@ -4,7 +4,7 @@ import { State } from '../store/game.reducer';
 import { Observable } from 'rxjs';
 import { Folder } from '../model';
 
-import { selectFolders } from '../store/game.selectors';
+import { selectFolders, selectFolderCount } from '../store/game.selectors';
 import { LoadFolders, DeleteFolder } from '../store/game.actions';
 import { MatDialog } from '@angular/material';
 import { CreateFolderComponent } from '../create-folder/create-folder.component';
@@ -18,6 +18,7 @@ import { CreateFolderComponent } from '../create-folder/create-folder.component'
 export class FolderListComponent implements OnInit {
 
   folders$: Observable<Array<Folder>>;
+  folderCount$: Observable<number>;
 
   constructor(
     private _store: Store<State>,
@@ -27,6 +28,7 @@ export class FolderListComponent implements OnInit {
   ngOnInit() {
     this._store.dispatch(new LoadFolders())
     this.folders$ = this._store.pipe(select(state => selectFolders(state)));
+    this.folderCount$ = this._store.pipe(select(state => selectFolderCount(state)));
   }
 
   addFolder() {

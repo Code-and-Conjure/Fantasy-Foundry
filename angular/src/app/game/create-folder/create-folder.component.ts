@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as moment from 'moment';
 
 import { Folder } from '../model';
 import { SaveFolder, LoadFolders, SelectFolder } from '../store/game.actions';
@@ -34,7 +33,7 @@ export class CreateFolderComponent implements OnInit {
     if(! this.folderFormGroup.valid)
       return;
     const save = this.folderFormGroup.value as Folder;
-    save._id = "folder_" + moment().toISOString();
+    save._id = "folder_" + new Date().toISOString();
 
     this._store.dispatch(new SaveFolder(save))
     this._dialogRef.close();

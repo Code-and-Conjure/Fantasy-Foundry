@@ -8,6 +8,7 @@ export enum GameActionTypes {
   SelectFolder = '[Game] Select Folder',
   SetFolders = '[Game] Set Folders',
   DeleteFolder = '[Game] Delete Folder',
+  RemoveFolder = '[Game] Remove Folder',
 }
 
 export class LoadFolders implements Action {
@@ -41,6 +42,12 @@ export class AddFolder implements Action {
 
 export class DeleteFolder implements Action {
   readonly type = GameActionTypes.DeleteFolder;
+
+  constructor(public payload: Folder) { }
+}
+
+export class RemoveFolder implements Action {
+  readonly type = GameActionTypes.RemoveFolder;
 
   constructor(public payload: Folder) { }
 }
