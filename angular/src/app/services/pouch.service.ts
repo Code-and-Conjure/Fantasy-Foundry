@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
-import { Observable, fromEvent, merge } from 'rxjs';
+import { Observable, from, fromEvent, merge } from 'rxjs';
 import { filter, flatMap } from 'rxjs/operators';
 
 @Injectable({
@@ -24,6 +24,10 @@ export class PouchService {
 
   set db(val) {
     this._db = val
+  }
+
+  login(replicationSource: string, user: string, password: string): Observable<any> {
+    return from(new PouchDB(replicationSource).logIn(user, password));
   }
 
   constructor() {

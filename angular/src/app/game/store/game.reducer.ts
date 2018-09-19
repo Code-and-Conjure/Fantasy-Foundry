@@ -13,6 +13,7 @@ export const initialState: State = {
 };
 
 export function reducer(state = initialState, action: GameActions): State {
+  let folders;
   switch (action.type) {
     case GameActionTypes.SelectFolder:
       return { ...state, selectedFolder: { ...action.payload } };
@@ -23,8 +24,13 @@ export function reducer(state = initialState, action: GameActions): State {
     case GameActionTypes.RemoveFolder:
       const indexToRemove = state.folders.findIndex(i => i._id === action.payload._id);
       state.folders.splice(indexToRemove, 1);
-      const folders = state.folders;
+      folders = state.folders;
       return { ...state, folders: folders }
+    case GameActionTypes.UpdateFolder:
+      folders = [...state.folders];
+      let oldFolderIndex = folders.findIndex(f => f._id === action.payload._id);
+      folders[oldFolderIndex] = action.payload;
+      return { ...state, folders };
     default:
       return { ...state };
   }
