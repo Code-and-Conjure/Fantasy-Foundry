@@ -10,7 +10,7 @@ export class PouchService {
 
   private readonly _user = "admin";
   private readonly _password = "secret_password";
-  private readonly _remote = `https://${this._user}:${this._password}@db/dev`;
+  private readonly _remote = `http://${this._user}:${this._password}@localhost:5984/dev`
 
   private _db = new PouchDB("aurora-comatose");
   private _couch = new PouchDB(this._remote);
