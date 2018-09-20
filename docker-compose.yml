@@ -17,6 +17,7 @@ services:
       - backend
     volumes:
       - couchdata:/opt/couchdb/data
+      - ./couch:/opt/couchdb/etc/local.d
     environment:
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=secret_password
