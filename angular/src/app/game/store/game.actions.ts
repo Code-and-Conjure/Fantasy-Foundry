@@ -11,6 +11,7 @@ export enum GameActionTypes {
   RemoveFolder = '[Game] Remove Folder',
   UpdateFolder = '[Game] Update Folder',
   RequestUpdateFolder = '[{Request} Game] Update Folder',
+  UpsertFolder = '[Game] Upsert Folder',
 }
 
 export class LoadFolders implements Action {
@@ -66,4 +67,10 @@ export class UpdateFolder implements Action {
   constructor(public payload: Folder) { }
 }
 
-export type GameActions = LoadFolders | SelectFolder | SaveFolder | AddFolder | SetFolders | DeleteFolder | RemoveFolder | UpdateFolder | RequestUpdateFolder;
+export class UpsertFolder implements Action {
+  readonly type = GameActionTypes.UpsertFolder;
+
+  constructor(public payload: Folder) { }
+}
+
+export type GameActions = LoadFolders | SelectFolder | SaveFolder | AddFolder | SetFolders | DeleteFolder | RemoveFolder | UpdateFolder | RequestUpdateFolder | UpsertFolder;

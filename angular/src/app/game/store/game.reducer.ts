@@ -31,6 +31,15 @@ export function reducer(state = initialState, action: GameActions): State {
       let oldFolderIndex = folders.findIndex(f => f._id === action.payload._id);
       folders[oldFolderIndex] = action.payload;
       return { ...state, folders };
+    case GameActionTypes.UpsertFolder:
+      folders = [...state.folders];
+      let existFolderIndex = folders.findIndex(f => f._id === action.payload._id);
+      if(existFolderIndex > -1){
+        folders[existFolderIndex] = action.payload;
+      } else {
+        folders = [action.payload, ...folders];
+      }
+      return {...state, folders};
     default:
       return { ...state };
   }

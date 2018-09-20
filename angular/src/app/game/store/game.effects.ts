@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders, DeleteFolder, RemoveFolder, UpdateFolder, RequestUpdateFolder } from './game.actions';
+import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders, DeleteFolder, RemoveFolder, UpdateFolder, RequestUpdateFolder, UpsertFolder } from './game.actions';
 import { filter, tap, map, switchMap, flatMap, catchError } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -56,11 +56,8 @@ export class GameEffects {
         if (c._deleted === true) {
           return new RemoveFolder(c);
         }
-        else if (c._rev.startsWith('1-')) {
-          return new AddFolder(c);
-        }
         else {
-          return new UpdateFolder(c);
+          return new UpsertFolder(c);
         }
       }
       ));
