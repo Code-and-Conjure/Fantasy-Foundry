@@ -6,6 +6,7 @@
   mat-card {
     flex: 0 0 auto;
     max-width: 25%;
+    min-width: 100px;
     word-wrap: break-word;
   }
 }

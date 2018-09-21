@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Folder } from '../model';
 
 import { selectFolders, selectFolderCount } from '../store/game.selectors';
-import { LoadFolders, DeleteFolder } from '../store/game.actions';
+import { RequestSetFolders, RequestDeleteFolder } from '../store/game.actions';
 import { MatDialog } from '@angular/material';
 import { CreateFolderComponent } from '../create-folder/create-folder.component';
 import { EditFolderComponent } from '../edit-folder/edit-folder.component';
@@ -27,7 +27,7 @@ export class FolderListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._store.dispatch(new LoadFolders())
+    this._store.dispatch(new RequestSetFolders())
     this.folders$ = this._store.pipe(select(state => selectFolders(state)));
     this.folderCount$ = this._store.pipe(select(state => selectFolderCount(state)));
   }
@@ -41,7 +41,7 @@ export class FolderListComponent implements OnInit {
   }
 
   deleteFolder(folder: Folder) {
-    this._store.dispatch(new DeleteFolder(folder));
+    this._store.dispatch(new RequestDeleteFolder(folder));
   }
 
 }

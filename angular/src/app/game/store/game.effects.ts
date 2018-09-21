@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders, DeleteFolder, RemoveFolder, UpdateFolder, RequestUpdateFolder, UpsertFolder } from './game.actions';
+import { GameActionTypes, RequestAddFolder, AddFolder, RequestSetFolders, SetFolders, DeleteFolder, RequestDeleteFolder, UpdateFolder, RequestUpdateFolder, UpsertFolder } from './game.actions';
 import { filter, tap, map, switchMap, flatMap, catchError } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class GameEffects {
 
   @Effect()
   loadFolders$ = this.actions$.pipe(
-    ofType(GameActionTypes.LoadFolders),
+    ofType(GameActionTypes.RequestSetFolders),
     switchMap(_ =>
       this._gameService.getFolders()
         .pipe(
@@ -24,8 +24,8 @@ export class GameEffects {
 
   @Effect()
   saveFolder$ = this.actions$.pipe(
-    ofType(GameActionTypes.SaveFolder),
-    map((v: SaveFolder) => v.payload),
+    ofType(GameActionTypes.RequestAddFolder),
+    map((v: RequestAddFolder) => v.payload),
     switchMap(v =>
       this._gameService.saveFolder(v).pipe(
         map((r: DbPutResponse) => {
@@ -54,7 +54,7 @@ export class GameEffects {
       filter(c => c._id.startsWith('folder_')),
       map(c => {
         if (c._deleted === true) {
-          return new RemoveFolder(c);
+          return new DeleteFolder(c);
         }
         else {
           return new UpsertFolder(c);
@@ -64,11 +64,11 @@ export class GameEffects {
 
   @Effect()
   deleteFolder$ = this.actions$.pipe(
-    ofType(GameActionTypes.DeleteFolder),
+    ofType(GameActionTypes.RequestDeleteFolder),
     map((v: DeleteFolder) => v.payload),
     switchMap(a => this._gameService.deleteFolder(a)
       .pipe(
-        map(_ => new RemoveFolder(a))
+        map(_ => new DeleteFolder(a))
       )),
   );
 

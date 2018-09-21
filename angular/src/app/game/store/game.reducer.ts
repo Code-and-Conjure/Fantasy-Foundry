@@ -21,7 +21,7 @@ export function reducer(state = initialState, action: GameActions): State {
       return { ...state, folders: [action.payload, ...state.folders] };
     case GameActionTypes.SetFolders:
       return { ...state, folders: [...action.payload] };
-    case GameActionTypes.RemoveFolder:
+    case GameActionTypes.DeleteFolder:
       const indexToRemove = state.folders.findIndex(i => i._id === action.payload._id);
       state.folders.splice(indexToRemove, 1);
       folders = state.folders;

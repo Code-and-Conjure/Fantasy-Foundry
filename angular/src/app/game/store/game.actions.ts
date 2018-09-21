@@ -2,20 +2,20 @@ import { Action } from '@ngrx/store';
 import { Folder } from '../model';
 
 export enum GameActionTypes {
+  RequestAddFolder = '[{Request} Game] Add Folder',
   AddFolder = '[Game] Add Folder',
-  LoadFolders = '[Game] Load Folders',
-  SaveFolder = '[Game] Save Folder',
-  SelectFolder = '[Game] Select Folder',
+  RequestSetFolders = '[{Request} Game] Set Folder',
   SetFolders = '[Game] Set Folders',
+  RequestDeleteFolder = '[{Request} Game] Delete Folder',
   DeleteFolder = '[Game] Delete Folder',
-  RemoveFolder = '[Game] Remove Folder',
-  UpdateFolder = '[Game] Update Folder',
   RequestUpdateFolder = '[{Request} Game] Update Folder',
+  UpdateFolder = '[Game] Update Folder',
   UpsertFolder = '[Game] Upsert Folder',
+  SelectFolder = '[Game] Select Folder',
 }
 
-export class LoadFolders implements Action {
-  readonly type = GameActionTypes.LoadFolders;
+export class RequestSetFolders implements Action {
+  readonly type = GameActionTypes.RequestSetFolders;
 }
 
 export class SetFolders implements Action {
@@ -31,8 +31,8 @@ export class SelectFolder implements Action {
 }
 
 
-export class SaveFolder implements Action {
-  readonly type = GameActionTypes.SaveFolder;
+export class RequestAddFolder implements Action {
+  readonly type = GameActionTypes.RequestAddFolder;
 
   constructor(public payload: Folder) { }
 }
@@ -43,14 +43,14 @@ export class AddFolder implements Action {
   constructor(public payload: Folder) { }
 }
 
-export class DeleteFolder implements Action {
-  readonly type = GameActionTypes.DeleteFolder;
+export class RequestDeleteFolder implements Action {
+  readonly type = GameActionTypes.RequestDeleteFolder;
 
   constructor(public payload: Folder) { }
 }
 
-export class RemoveFolder implements Action {
-  readonly type = GameActionTypes.RemoveFolder;
+export class DeleteFolder implements Action {
+  readonly type = GameActionTypes.DeleteFolder;
 
   constructor(public payload: Folder) { }
 }
@@ -73,4 +73,4 @@ export class UpsertFolder implements Action {
   constructor(public payload: Folder) { }
 }
 
-export type GameActions = LoadFolders | SelectFolder | SaveFolder | AddFolder | SetFolders | DeleteFolder | RemoveFolder | UpdateFolder | RequestUpdateFolder | UpsertFolder;
+export type GameActions = RequestSetFolders | SelectFolder | RequestAddFolder | AddFolder | SetFolders | DeleteFolder | RequestDeleteFolder | UpdateFolder | RequestUpdateFolder | UpsertFolder;
