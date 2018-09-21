@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders, DeleteFolder, RemoveFolder } from './game.actions';
+import { GameActionTypes, SaveFolder, AddFolder, LoadFolders, SetFolders, DeleteFolder, RemoveFolder, UpdateFolder, RequestUpdateFolder, UpsertFolder } from './game.actions';
 import { filter, tap, map, switchMap, flatMap, catchError } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -36,7 +36,20 @@ export class GameEffects {
   );
 
   @Effect()
-  syncGameChanges$ = this._gameService.changeFeed
+  updateFolder$ = this.actions$.pipe(
+    ofType(GameActionTypes.RequestUpdateFolder),
+    map((v: RequestUpdateFolder) => v.payload),
+    switchMap(v =>
+      this._gameService.updateFolder(v).pipe(
+        map((r: DbPutResponse) => {
+          v._rev = r.rev;
+          return new UpdateFolder(v);
+        })
+      ))
+  );
+
+  @Effect()
+  folderChanges$ = this._gameService.changeFeed
     .pipe(
       filter(c => c._id.startsWith('folder_')),
       map(c => {
@@ -44,7 +57,7 @@ export class GameEffects {
           return new RemoveFolder(c);
         }
         else {
-          return new AddFolder(c);
+          return new UpsertFolder(c);
         }
       }
       ));

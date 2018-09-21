@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
-import { Observable, fromEvent, merge } from 'rxjs';
+import { Observable, from, fromEvent, merge } from 'rxjs';
 import { filter, flatMap } from 'rxjs/operators';
 
 @Injectable({
@@ -9,8 +9,8 @@ import { filter, flatMap } from 'rxjs/operators';
 export class PouchService {
 
   private readonly _user = "admin";
-  private readonly _password = "password";
-  private readonly _remote = `http://${this._user}:${this._password}@localhost:5984/rpg_cli`
+  private readonly _password = "secret_password";
+  private readonly _remote = `http://${this._user}:${this._password}@localhost:5984/dev`
 
   private _db = new PouchDB("aurora-comatose");
   private _couch = new PouchDB(this._remote);
@@ -24,6 +24,10 @@ export class PouchService {
 
   set db(val) {
     this._db = val
+  }
+
+  login(replicationSource: string, user: string, password: string): Observable<any> {
+    return from(new PouchDB(replicationSource).logIn(user, password));
   }
 
   constructor() {

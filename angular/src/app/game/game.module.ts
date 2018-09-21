@@ -18,7 +18,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { GameEffects } from './store/game.effects';
 import { FolderListComponent } from './folder-list/folder-list.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

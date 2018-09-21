@@ -29,11 +29,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { PouchService } from './services/pouch.service';
 import { GameModule } from './game/game.module';
 import { CreateFolderComponent } from './game/create-folder/create-folder.component';
+import { EditFolderComponent } from './game/edit-folder/edit-folder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateFolderComponent,
+    EditFolderComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { CreateFolderComponent } from './game/create-folder/create-folder.compon
     PouchService,
   ],
   entryComponents: [
-    CreateFolderComponent
+    CreateFolderComponent,
+    EditFolderComponent,
   ],
   bootstrap: [AppComponent]
 })

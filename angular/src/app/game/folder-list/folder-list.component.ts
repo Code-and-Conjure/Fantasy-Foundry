@@ -8,6 +8,7 @@ import { selectFolders, selectFolderCount } from '../store/game.selectors';
 import { LoadFolders, DeleteFolder } from '../store/game.actions';
 import { MatDialog } from '@angular/material';
 import { CreateFolderComponent } from '../create-folder/create-folder.component';
+import { EditFolderComponent } from '../edit-folder/edit-folder.component';
 
 @Component({
   selector: 'rpg-folder-list',
@@ -33,6 +34,10 @@ export class FolderListComponent implements OnInit {
 
   addFolder() {
     const ref = this._dialog.open(CreateFolderComponent).afterClosed().subscribe();
+  }
+
+  editFolder(folder: Folder) {
+    const ref = this._dialog.open(EditFolderComponent, { data: folder }).afterClosed().subscribe();
   }
 
   deleteFolder(folder: Folder) {

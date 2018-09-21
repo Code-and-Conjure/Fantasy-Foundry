@@ -4,6 +4,11 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
+import PouchDB from 'pouchdb';
+import PouchAuth from 'pouchdb-authentication';
+PouchDB.plugin(PouchAuth);
+
+
 if (environment.production) {
   enableProdMode();
 }
