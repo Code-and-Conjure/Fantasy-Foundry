@@ -4,8 +4,8 @@ import { Folder } from '../model';
 export enum GameActionTypes {
   RequestAddFolder = '[{Request} Game] Add Folder',
   AddFolder = '[Game] Add Folder',
-  RequestSetFolders = '[{Request} Game] Set Folder',
-  SetFolders = '[Game] Set Folders',
+  RequestLoadFolders = '[{Request} Game] Load Folder',
+  LoadFolders = '[Game] Load Folders',
   RequestDeleteFolder = '[{Request} Game] Delete Folder',
   DeleteFolder = '[Game] Delete Folder',
   RequestUpdateFolder = '[{Request} Game] Update Folder',
@@ -14,12 +14,12 @@ export enum GameActionTypes {
   SelectFolder = '[Game] Select Folder',
 }
 
-export class RequestSetFolders implements Action {
-  readonly type = GameActionTypes.RequestSetFolders;
+export class RequestLoadFolders implements Action {
+  readonly type = GameActionTypes.RequestLoadFolders;
 }
 
-export class SetFolders implements Action {
-  readonly type = GameActionTypes.SetFolders;
+export class LoadFolders implements Action {
+  readonly type = GameActionTypes.LoadFolders;
 
   constructor(public payload: Array<Folder>) { }
 }
@@ -73,4 +73,4 @@ export class UpsertFolder implements Action {
   constructor(public payload: Folder) { }
 }
 
-export type GameActions = RequestSetFolders | SelectFolder | RequestAddFolder | AddFolder | SetFolders | DeleteFolder | RequestDeleteFolder | UpdateFolder | RequestUpdateFolder | UpsertFolder;
+export type GameActions = RequestLoadFolders | SelectFolder | RequestAddFolder | AddFolder | LoadFolders | DeleteFolder | RequestDeleteFolder | UpdateFolder | RequestUpdateFolder | UpsertFolder;

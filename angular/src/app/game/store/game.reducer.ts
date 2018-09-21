@@ -19,7 +19,7 @@ export function reducer(state = initialState, action: GameActions): State {
       return { ...state, selectedFolder: { ...action.payload } };
     case GameActionTypes.AddFolder:
       return { ...state, folders: [action.payload, ...state.folders] };
-    case GameActionTypes.SetFolders:
+    case GameActionTypes.LoadFolders:
       return { ...state, folders: [...action.payload] };
     case GameActionTypes.DeleteFolder:
       const indexToRemove = state.folders.findIndex(i => i._id === action.payload._id);
@@ -34,12 +34,12 @@ export function reducer(state = initialState, action: GameActions): State {
     case GameActionTypes.UpsertFolder:
       folders = [...state.folders];
       let existFolderIndex = folders.findIndex(f => f._id === action.payload._id);
-      if(existFolderIndex > -1){
+      if (existFolderIndex > -1) {
         folders[existFolderIndex] = action.payload;
       } else {
         folders = [action.payload, ...folders];
       }
-      return {...state, folders};
+      return { ...state, folders: folders };
     default:
       return { ...state };
   }

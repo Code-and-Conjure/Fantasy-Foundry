@@ -1,7 +1,10 @@
 <mat-accordion>
-  <mat-expansion-panel>
+  <mat-expansion-panel #expand>
     <mat-expansion-panel-header>
-      <mat-panel-title>Folders</mat-panel-title>
+      <mat-panel-title *ngIf="(selectedFolder$ | async) as user;else wordFolder">{{user.name}}</mat-panel-title>
+      <ng-template #selectedFolderName>
+        <mat-panel-title>Folders</mat-panel-title>
+      </ng-template>
       <mat-panel-description>Total: {{folderCount$ | async}}</mat-panel-description>
     </mat-expansion-panel-header>
     <div class="folder">
@@ -18,7 +21,7 @@
           {{folder.description}}
         </mat-card-subtitle>
         <mat-card-actions>
-          <button mat-icon-button color="primary"><mat-icon>folder_open</mat-icon></button>
+          <button mat-icon-button color="primary" (click)="selectFolder(folder); expand.close()"><mat-icon>folder_open</mat-icon></button>
           <button mat-icon-button color="accent" (click)="editFolder(folder)"><mat-icon>mode_edit</mat-icon></button>
           <button mat-icon-button color="warn" (click)="deleteFolder(folder)"><mat-icon>delete</mat-icon></button>
         </mat-card-actions>

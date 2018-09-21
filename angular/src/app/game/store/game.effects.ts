@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { GameActionTypes, RequestAddFolder, AddFolder, RequestSetFolders, SetFolders, DeleteFolder, RequestDeleteFolder, UpdateFolder, RequestUpdateFolder, UpsertFolder } from './game.actions';
+import { GameActionTypes, RequestAddFolder, AddFolder, RequestLoadFolders, LoadFolders, DeleteFolder, RequestDeleteFolder, UpdateFolder, RequestUpdateFolder, UpsertFolder } from './game.actions';
 import { filter, tap, map, switchMap, flatMap, catchError } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -13,12 +13,12 @@ export class GameEffects {
 
   @Effect()
   loadFolders$ = this.actions$.pipe(
-    ofType(GameActionTypes.RequestSetFolders),
+    ofType(GameActionTypes.RequestLoadFolders),
     switchMap(_ =>
       this._gameService.getFolders()
         .pipe(
           map(v => v.rows.map(r => r.doc)),
-          map(v => new SetFolders(v))
+          map(v => new LoadFolders(v))
         )),
   )
 
