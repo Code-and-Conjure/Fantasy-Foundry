@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Folder } from '../model';
-import { RequestAddFolder } from '../store/game.actions';
+import { RequestAddFolder } from '../store/pc.actions';
 import { ActivatedRoute } from '@angular/router';
 import { switchMapTo } from 'rxjs/operators';
 import { MatDialogRef } from '@angular/material';

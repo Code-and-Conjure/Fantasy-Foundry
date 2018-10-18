@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { State } from '../store/game.reducer';
+import { State } from '../store/pc.reducer';
 import { Observable } from 'rxjs';
 import { Folder } from '../model';
 
-import { selectFolders, selectFolderCount, selectSelectedFolder } from '../store/game.selectors';
-import { RequestLoadFolders, RequestDeleteFolder, SelectFolder } from '../store/game.actions';
+import { selectFolders, selectFolderCount, selectSelectedFolder } from '../store/pc.selector';
+import { RequestLoadFolders, RequestDeleteFolder, SelectFolder } from '../store/pc.actions';
 import { MatDialog } from '@angular/material';
 import { CreateFolderComponent } from '../create-folder/create-folder.component';
 import { EditFolderComponent } from '../edit-folder/edit-folder.component';

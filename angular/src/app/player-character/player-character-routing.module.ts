@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FolderListComponent } from './folder-list/folder-list.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "user", pathMatch: "full" },
-  { path: "**", redirectTo: "user", pathMatch: "full" },
+  { path: "", component: FolderListComponent,
+    children: [
+    ]},
+  { path: "**", redirectTo: "", pathMatch: "full" },
 ];
 
 @NgModule({

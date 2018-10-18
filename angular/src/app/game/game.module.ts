@@ -10,13 +10,15 @@ import {
   MatCardModule,
   MatButtonModule,
   MatDialogModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSidenavModule,
+  MatListModule,
+  MatTooltipModule
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import * as fromGame from './store/game.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GameEffects } from './store/game.effects';
-import { FolderListComponent } from './folder-list/folder-list.component';
 
 @NgModule({
   imports: [
@@ -26,12 +28,14 @@ import { FolderListComponent } from './folder-list/folder-list.component';
     StoreModule.forFeature('game', fromGame.reducer),
     EffectsModule.forFeature([GameEffects]),
     MatCardModule,
+    MatSidenavModule,
+    MatListModule,
     MatExpansionModule,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
   ],
-  declarations: [FolderListComponent]
+  declarations: []
 })
 export class GameModule { }

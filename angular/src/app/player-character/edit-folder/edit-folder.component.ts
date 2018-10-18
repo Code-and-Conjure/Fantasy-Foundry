@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { State } from '../store/game.reducer';
-import { RequestUpdateFolder } from '../store/game.actions';
+import { State } from '../store/pc.reducer';
+import { RequestUpdateFolder } from '../store/pc.actions';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Folder } from '../model';
 

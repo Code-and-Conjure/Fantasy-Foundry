@@ -28,8 +28,8 @@ import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { PouchService } from './services/pouch.service';
 import { GameModule } from './game/game.module';
-import { CreateFolderComponent } from './game/create-folder/create-folder.component';
-import { EditFolderComponent } from './game/edit-folder/edit-folder.component';
+import { CreateFolderComponent } from './player-character/create-folder/create-folder.component';
+import { EditFolderComponent } from './player-character/edit-folder/edit-folder.component';
 
 @NgModule({
   declarations: [
