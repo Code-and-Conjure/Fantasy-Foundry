@@ -9,11 +9,11 @@ WORKDIR /usr/src/app
 
 COPY ./angular .
 
-RUN npm cache verify && npm install
+RUN npm cache verify && npm ci
 RUN npm rebuild node-sass
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 EXPOSE 80
 
-CMD ng serve --host 0.0.0.0 --port 80
+CMD ["npm", "start"]

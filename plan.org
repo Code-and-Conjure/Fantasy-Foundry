@@ -61,3 +61,7 @@
           levelUp(p, n);
      }
    #+END_SRC
+* Routing
+** Game
+   Game board and state. Also allow for sharing via this route
+** PC
