@@ -50,8 +50,4 @@ export class FolderListComponent implements OnInit {
     this._store.dispatch(new SelectFolder(folder));
   }
 
-  selectFolder(folder: Folder) {
-    this._store.dispatch(new SelectFolder(folder));
-  }
-
 }
