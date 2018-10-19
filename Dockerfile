@@ -1,3 +1,4 @@
+# Stage 1
 FROM node:10-alpine as angular
 
 RUN apk add --update \
@@ -22,6 +23,6 @@ FROM nginx:1.13.12-alpine as webhost
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=angular /usr/src/app/angular/dist /usr/share/nginx/html
+COPY --from=angular /usr/src/app/dist/angular /usr/share/nginx/html
 
 COPY ./angular/nginx.conf /etc/nginx/conf.d/default.conf
