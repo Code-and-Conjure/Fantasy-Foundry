@@ -8,8 +8,7 @@ RUN apk add --update \
 
 WORKDIR /usr/src/app
 
-COPY angular/package.json ./
-COPY angular/package-lock.json ./
+COPY angular/package.json angular/package-lock.json ./
 
 RUN npm ci
 RUN npm rebuild node-sass
