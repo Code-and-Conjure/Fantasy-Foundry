@@ -7,7 +7,9 @@ services:
     container_name: aurora_comatose
     networks:
       - backend
-    build: ./angular
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 80:80
   db:

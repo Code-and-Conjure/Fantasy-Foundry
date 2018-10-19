@@ -1,4 +1,4 @@
-FROM node:9-alpine as node
+FROM node:10-alpine as angular
 
 RUN apk add --update \
   python \
@@ -7,11 +7,11 @@ RUN apk add --update \
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
+COPY angular/package.json ./
 
 RUN npm cache verify && npm install
 
-COPY . .
+COPY ./angular .
 
 RUN npm run build
 
@@ -20,4 +20,4 @@ FROM nginx:1.13.12-alpine
 
 COPY --from=node /usr/src/app/dist/angular /usr/share/nginx/html
 
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./angular/nginx.conf /etc/nginx/conf.d/default.conf
