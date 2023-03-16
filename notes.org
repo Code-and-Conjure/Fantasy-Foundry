@@ -1,0 +1,50 @@
+#+title: Fantasy Foundry
+
+* Character Sheets
+** Middleware
+Each middleware will operate on a "Global" `Context` which represents the current state of the character.
+Middleware will be organized heirarchically with the top level calling `next()`, and awaiting its response.
+
+*** First:
+User must select a series of systems to run with their "game". These include:
++ D&D 5e
+  - Homebrew (for adding custom stats)
+  - Races
+    * Human
+    * Elf
+    * Homebrew
+  - Tasha's Cauldron of Everything
++ Pathfinder
+
+1) Website for selecting sources (from anywhere [ offically supported, user submitted, community submited, etc.. ]);
+2) A custom Docker container with *our* Game runtime system already primed for configuring/running middlewares.
+3) User submits their selected sources
+4) A server builds a docker container which includes the *compiled* sources and runtime
+5) User downloads the container and runs it.
+5.1) A user can pay to host the container on ECS with a global url.
+
+6) Container includes a connection to OpenZiti network, and when run - the user is given a localhost uri to
+   run their game through (including: Chat, character creation, game maps, settings, etc.)
+
+
+
+
+*** Prompts:
+The user must answer a series of questions while filling out their character sheet. The middleware will register
+prompts for the user to respond to, which will affect control flow.
+ie.
+
+#+begin_src javascript
+// Setup State
+context.properties.attributes = [ {} ];
+
+// Add any UI questions
+context.prompt.push("Select a race", { "type": "dropdown", "options": context.config["races"] }, "race");
+context.prompt.push("How tall are you", { "type": "number" }, "height");
+
+next();
+
+if ( request.race === "human" ) {
+    Math.clamp(context.player.height, 5, 7);
+}
+#+end_src
