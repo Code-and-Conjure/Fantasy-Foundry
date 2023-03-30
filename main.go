@@ -5,33 +5,49 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/dnd5e"
 	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/dnd5e/class"
 	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/dnd5e/race"
-	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/engine"
+	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/pathfinder"
+	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/pathfinder/divinity"
+	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/pathfinder/profession"
 	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/state"
-	"github.com/Code-and-Conjure/Fantasy-Foundry/v2/util"
 )
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	state := state.InitState(&engine.Dnd5e{})
+	var handler func(state.State)
+	var gameState state.State
+	if rand.Float32() < 0.5 {
+		gameState = dnd5e.InitState()
+		dndHandler := dnd5e.EndingMiddleware
+		if rand.Float32() < 0.5 {
+			dndHandler = class.PaladinMiddleware(dndHandler)
+		} else {
+			dndHandler = class.RogueMiddleware(dndHandler)
+		}
+		if rand.Float32() < 0.5 {
+			dndHandler = race.HumanMiddleware(dndHandler)
+		} else {
+			dndHandler = race.DwarfMiddleware(dndHandler)
+		}
+		handler = dnd5e.Middleware(dndHandler)
+	} else {
+		gameState = pathfinder.InitState()
+		pathfinderHandler := pathfinder.EndingMiddleware
+		if rand.Float32() < 0.5 {
+			pathfinderHandler = divinity.AstralMiddleware(pathfinderHandler)
+		} else {
+			pathfinderHandler = divinity.FlareMiddleware(pathfinderHandler)
+		}
+		if rand.Float32() < 0.5 {
+			pathfinderHandler = profession.ScholarMiddleware(pathfinderHandler)
+		} else {
+			pathfinderHandler = profession.AtheleteMiddleware(pathfinderHandler)
+		}
+		handler = pathfinder.Middleware(pathfinderHandler)
+	}
 
-	handler := util.EndingMiddleware
-	if rand.Float32() < 0.5 {
-		handler = class.PaladinMiddleware(handler)
-	} else {
-		handler = class.RogueMiddleware(handler)
-	}
-	if rand.Float32() < 0.5 {
-		handler = race.HumanMiddleware(handler)
-	} else {
-		handler = race.DwarfMiddleware(handler)
-	}
-	handler(state)
-	fmt.Println(state.Player.Race)
-	fmt.Println(state.Player.Class)
-	fmt.Println(state.Player.Height)
-	for _, v := range state.Player.Stats {
-		fmt.Println(*v)
-	}
+	handler(gameState)
+	fmt.Println(gameState.String())
 }
